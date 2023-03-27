@@ -2,25 +2,28 @@
 
 #define MAX_BASE  (26 * 2 + 10)  // 26 Letters can be used in small and capital form and 10 digits 0..9
 
-unsigned int x[75] = { 
-					15840, 16465, 17941, 17942, 18898, 19172, 20512, 20626, 20758, 25736,
-					25893, 26039, 26134, 26345, 26346, 26676, 28161, 31622, 31873, 32028,
-					35260, 36368, 36428, 38716, 38805, 40111, 40893, 40956, 40957, 40958,
-					40959, 40960, 42541, 47987, 49137, 49169, 49443, 49444, 49639, 50047,
-					50048, 50127, 50128, 50129, 51183, 51184, 51204, 52071, 52977, 54650,
-					55908, 56100, 57924, 60538, 60539, 60540, 61474, 63141, 64436, 64437,
-					67416, 72677, 73039, 73040, 73211, 73654, 73756, 74037, 74038, 76081,
-					76082, 79467, 79564, 79790, 79791 
-					};
-char y[75][3] = {	"cGp",	"cmW",	"cX3",	"cXB",	"ctR",	"ckN",	"PVg",	"PD4",	"PBR",	"MYM",	
-					"MSL",	"MUk",	"MIE",	"Mgr",	"MgK",	"MKd",	"GVT",	"vNx",	"vwP",	"vV9",	
-					"zAj",	"zO9",	"zu1",	"AcO",	"APF",	"AHl",	"ALW",	"AQ9",	"AQs",	"AQq",	
-					"AQL",	"AQQ",	"Zcz",	"yuk",	"yh2",	"yIi",	"yau",	"yap",	"ytL",	"T7T",	
-					"T7N",	"Tx8",	"TxE",	"Tx2",	"Tn2",	"Tn1",	"Tnf",	"T2a",	"Thu",	"NTO",	
-					"N2e",	"N9g",	"ocd",	"oeH",	"oe0",	"oeO",	"okE",	"dH6",	"dUw",	"dUn",	
-					"m2D",	"wtT",	"nCi",	"nCc",	"nxJ",	"nzb",	"nZq",	"ndz",	"ndA",	"nIG",	
-					"nIv",	"VXS",	"VYw",	"VeK",	"Vel",
-				};
+unsigned int x[75] = 
+	{ 
+		15840, 16465, 17941, 17942, 18898, 19172, 20512, 20626, 20758, 25736,
+		25893, 26039, 26134, 26345, 26346, 26676, 28161, 31622, 31873, 32028,
+		35260, 36368, 36428, 38716, 38805, 40111, 40893, 40956, 40957, 40958,
+		40959, 40960, 42541, 47987, 49137, 49169, 49443, 49444, 49639, 50047,
+		50048, 50127, 50128, 50129, 51183, 51184, 51204, 52071, 52977, 54650,
+		55908, 56100, 57924, 60538, 60539, 60540, 61474, 63141, 64436, 64437,
+		67416, 72677, 73039, 73040, 73211, 73654, 73756, 74037, 74038, 76081,
+		76082, 79467, 79564, 79790, 79791 
+	};
+char y[75][3] = 
+	{	
+		"cGp",	"cmW",	"cX3",	"cXB",	"ctR",	"ckN",	"PVg",	"PD4",	"PBR",	"MYM",	
+		"MSL",	"MUk",	"MIE",	"Mgr",	"MgK",	"MKd",	"GVT",	"vNx",	"vwP",	"vV9",	
+		"zAj",	"zO9",	"zu1",	"AcO",	"APF",	"AHl",	"ALW",	"AQ9",	"AQs",	"AQq",	
+		"AQL",	"AQQ",	"Zcz",	"yuk",	"yh2",	"yIi",	"yau",	"yap",	"ytL",	"T7T",	
+		"T7N",	"Tx8",	"TxE",	"Tx2",	"Tn2",	"Tn1",	"Tnf",	"T2a",	"Thu",	"NTO",	
+		"N2e",	"N9g",	"ocd",	"oeH",	"oe0",	"oeO",	"okE",	"dH6",	"dUw",	"dUn",	
+		"m2D",	"wtT",	"nCi",	"nCc",	"nxJ",	"nzb",	"nZq",	"ndz",	"ndA",	"nIG",	
+		"nIv",	"VXS",	"VYw",	"VeK",	"Vel"
+	};
 
 int count_unique_characters(char ref[75][3]);
 void rebase_decimal_number(unsigned int dec, unsigned int base, unsigned int* d1, unsigned int* d2, unsigned int* d3);
@@ -31,24 +34,26 @@ int main(void)
 	unsigned int valid_base = 0;
 	unsigned int task_inputs[3] = { 30001, 55555, 77788 };
 	char base_digits[MAX_BASE] = { 0 };
+	unsigned int dig1, dig2, dig3;
 
-	unsigned int dig1 = 0, dig2 = 0, dig3 = 0;
-	// This is to check our reference table for count of unique characters (digits) to define the minimal base (it can be the case that not all characters and figures are used)
+	// This is to check our reference table for count of unique characters (digits) to define the minimal numbering system base 
+	// (it can be the case when not all characters and figures are used)
 	min_base = count_unique_characters(y);
 	printf("Total unique characters: %u\n\n", min_base);
 
 	for (int i = min_base; i <= MAX_BASE; i++)
 	{
-		printf("\nPossible base is: %u\n", i);
+		printf("\nPossible numbering system base is: %u\n", i);
 		for (int j = 0; j < 75; j++)
 		{
 			rebase_decimal_number(x[j], i, &dig1, &dig2, &dig3);
 			printf("%02u). %u -> %c %c %c : %02u %02u %02u",j+1, x[j], y[j][0], y[j][1], y[j][2], dig3, dig2, dig1);
-			// The fastest way to check if this number base is correct is to check if it's found digits decimal representations for this base are matching the same characters...
+			// The fastest way to check if this numbering system base is correct is to check if it's found digits decimal representations for this base 
+			// are matching the same characters...
 			// In spreadsheet we have 2 nice points of function with duplicated characters...
 			// So we can start our check of selected base corectness by checking if digits for these duplicated characters are the same:
-			// 40960	AQQ (Two "Q")   - rebase result in decimal digits representation should result digits like XXX YYY YYY
-			// 50047	T7T (Two "T")   - rebase result in decimal digits representation should result digits like ZZZ AAA ZZZ
+			// 40960	AQQ (Two "Q")   - rebase result in decimal digits representation should result digits like XX YY YY (Condition 1)
+			// 50047	T7T (Two "T")   - rebase result in decimal digits representation should result digits like ZZ AA ZZ (Condition 2)
 			if (40960 == x[j])
 			{
 				if (dig2 == dig1)
@@ -71,6 +76,9 @@ int main(void)
 				printf("\n");
 		}
 	}
+
+	printf("\nValid numbering system base is: %u\n\n", valid_base);
+
 	// Now we should find how our base figures are assigned to characters and figures
 	// Let's scan (again) reference table and make this assignment
 	for (int k = 0; k < 75; k++)
@@ -105,6 +113,7 @@ int main(void)
 	printf("****BUT this range can be extended if result can consist more than 3 digits (it's not clear from task if it can't)*****\n\n");
 }
 
+// This function covers our task requirements. It's not universal but it does what it has to do in task conditions
 int count_unique_characters(char ref[75][3])
 {
 	int hash[128] = { 0 };
@@ -135,6 +144,7 @@ int count_unique_characters(char ref[75][3])
 
 	return c;
 }
+
 // This function covers our task requirements. It's not universal but it does what it has to do in task conditions
 void rebase_decimal_number(unsigned int dec, unsigned int base, unsigned int *d1, unsigned int *d2, unsigned int *d3)
 {
